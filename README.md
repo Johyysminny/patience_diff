@@ -46,7 +46,7 @@ Python port by Shaun Joe
 ## Project Structure
 
 ```
-bram_diff/                      # Python package (11 modules)
+patience_diff/                  # Python package (11 modules)
 ├── patience_diff.py      # Core algorithm (700+ lines)
 ├── plain_diff.py         # Myers fallback
 ├── hunk.py               # Hunk data structures
@@ -69,6 +69,10 @@ setup.py                  # Package setup
 pyproject.toml            # Build configuration
 README.md
 ```
+
+The installed distribution remains `patience_diff_algo`. The primary import
+package is `patience_diff`; the legacy `bram_diff` import path remains available
+for compatibility.
 
 
 ## Testing
@@ -101,4 +105,3 @@ The Patience Diff algorithm works in several steps:
 
 - http://bazaar-vcs.org - Original implementation
 - Eugene W. Myers: "An O(ND) Difference Algorithm and Its Variations"
-

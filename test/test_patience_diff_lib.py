@@ -4,13 +4,12 @@ import sys
 import os
 
 # Add src to path
-src_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'bram_diff')
+src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
-import bram_diff.patience_diff as patience_diff
-from bram_diff.patience_diff import MatchingBlock, Hunk
-
+import patience_diff
+from patience_diff import MatchingBlock, Hunk
 
 class TestBasicMatching:
     """Test basic matching functionality."""
@@ -126,6 +125,11 @@ class TestSemanticCleanup:
 
 class TestMatches:
     """Test match extraction functionality."""
+
+    def test_legacy_import_path(self):
+        import bram_diff.patience_diff as legacy_patience_diff
+
+        assert legacy_patience_diff.matches(list("a"), list("bab")) == [(0, 1)]
 
     def test_matches_after_prefix_and_unique_anchor(self):
         assert patience_diff.matches(list("ab"), list("acb")) == [(0, 0), (1, 2)]
