@@ -374,7 +374,7 @@ def _matches_recursive(prev_array, next_array, prev_lo, prev_hi, next_lo, next_h
             matches_list.append((prev_lo, next_lo))
             prev_lo += 1
             next_lo += 1
-        _matches_recursive(prev_array, next_array, prev_lo, next_lo, prev_hi, next_hi, matches_list)
+        _matches_recursive(prev_array, next_array, prev_lo, prev_hi, next_lo, next_hi, matches_list)
     
     # Check if last elements match
     elif prev_array[prev_hi - 1] == next_array[next_hi - 1]:
@@ -386,7 +386,7 @@ def _matches_recursive(prev_array, next_array, prev_lo, prev_hi, next_lo, next_h
             nahi -= 1
             nbhi -= 1
         
-        _matches_recursive(prev_array, next_array, prev_lo, next_lo, nahi, nbhi, matches_list)
+        _matches_recursive(prev_array, next_array, prev_lo, nahi, next_lo, nbhi, matches_list)
         
         # Add matching sequence at end
         for i in range(prev_hi - nahi):
@@ -404,13 +404,13 @@ def _matches_recursive(prev_array, next_array, prev_lo, prev_hi, next_lo, next_h
         
         for apos, bpos in lcs:
             if last_a + 1 != apos or last_b + 1 != bpos:
-                _matches_recursive(prev_array, next_array, last_a + 1, last_b + 1, apos, bpos, matches_list)
+                _matches_recursive(prev_array, next_array, last_a + 1, apos, last_b + 1, bpos, matches_list)
             last_a = apos
             last_b = bpos
             matches_list.append((apos, bpos))
         
         if lcs:
-            _matches_recursive(prev_array, next_array, last_a + 1, last_b + 1, prev_hi, next_hi, matches_list)
+            _matches_recursive(prev_array, next_array, last_a + 1, prev_hi, last_b + 1, next_hi, matches_list)
 
 
 def _combine_equalities(prev_array, next_array, matches: List[MatchingBlock]) -> List[MatchingBlock]:

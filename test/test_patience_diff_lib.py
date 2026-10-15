@@ -126,6 +126,10 @@ class TestSemanticCleanup:
 
 class TestMatches:
     """Test match extraction functionality."""
+
+    def test_matches_after_prefix_and_unique_anchor(self):
+        assert patience_diff.matches(list("ab"), list("acb")) == [(0, 0), (1, 2)]
+        assert patience_diff.matches(list("a"), list("bab")) == [(0, 1)]
     
     def test_matches_extraction(self):
         """Test extracting individual matches."""
